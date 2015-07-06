@@ -67,14 +67,14 @@
 
                 var timeout = setTimeout(function() {
                     delete ignoreNicknames[data.nick];
-                }, 4000);
+                }, 10000);
 
                 ignoreNicknames[data.nick] = timeout;
             } else {
                 clearTimeout(ignoreNicknames[data.nick]);
                 var timeout = setTimeout(function() {
                     delete ignoreNicknames[data.nick];
-                }, 4000);
+                }, 10000);
 
                 ignoreNicknames[data.nick] = timeout;
                 console.log('skipping..');
