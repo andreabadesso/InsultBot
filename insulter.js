@@ -1,6 +1,7 @@
 (function() {
     'use strict';
-    var WebSocket = require('ws');
+    var WebSocket       = require('ws');
+    var MersenneTwister = require('mersenne-twister');
 
     var channels = [
         'lobby',
@@ -44,6 +45,7 @@
     };
 
     var socketList = [];
+    var generator = new MersenneTwister();
 
     function setup(botname, room) {
         var ws = new WebSocket('wss://hack.chat/chat-ws', null, {
@@ -56,7 +58,7 @@
 
         ws.onmessage = function(message) {
             console.log('Message... ');
-            var randomIndex = parseInt(Math.random(1, 10) * insults.length, 10);
+            var randomIndex = parseInt(generator.random(1, 10) * insults.length, 10);
             var insult = insults[randomIndex];
             var data = JSON.parse(message.data)
 
