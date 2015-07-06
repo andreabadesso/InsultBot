@@ -32,7 +32,8 @@
         'Thou art a wayward reeling-ripe moldwarp. ',
         'Thy froward knotty-pated lout hath a ill-nurtured giglet. ',
         'Thy artless rump-fed death-token hath a milk-livered vassal. ',
-        'Thy reeky clay-brained vassal hath a toad-spotted mammet. '
+        'Thy reeky clay-brained vassal hath a toad-spotted mammet. ',
+        'I think you might have something wrong with your brain. Why are you trying to be all cyberbully on me. Do you really think anyone cares about you. You talk to people like they are trash. Why would you want to come off like that. Does it make you feel tough? Are you trying to make up for having a small smelly dick? You need to see a shrink. Have fun going through life wondering why people don\'t like you. I\'ll give you a hint though, you try to make others feel like ****. But you have failed on me. I know what you are. See, the thing is, I\'m a nice guy. You on the other hand can\'t control your stupidity. You really don\'t even realize that you are a jerk ,do you? When your older maybe you can look back on times like this and see that you where unnecessarily rude to people you don\'t know. Right now you think you are being cleaver and it is just a fun time. Keep treating people like you do and see where you end up. You can not compete with my intellect so I warn you to give up before you embarrass yourself further..'
     ];
 
     var ignoreNicknames = {
