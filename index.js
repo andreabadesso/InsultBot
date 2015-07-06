@@ -36,8 +36,8 @@
     ];
 
     var ignoreNicknames = {
-        'Mr. Walters': '',
-        '*': ''
+        'Mr. Walters': -1,
+        '*': -1
     };
 
     var socketList = [];
@@ -58,12 +58,22 @@
             var data = JSON.parse(message.data)
 
             if (!ignoreNicknames.hasOwnProperty(data.nick)) {
-                ws.send(JSON.stringify(['chat', '@' + data.nick + ': ' + insult + '']))
-                ignoreNicknames[data.nick] = '';
-                setTimeout(function() {
+                if (data.nick !== botname && data.nick !== '*') {
+                    ws.send(JSON.stringify(['chat', '@' + data.nick + ': ' + insult + '']))
+                }
+
+                var timeout = setTimeout(function() {
                     delete ignoreNicknames[data.nick];
                 }, 4000);
+
+                ignoreNicknames[data.nick] = timeout;
             } else {
+                clearTimeout(ignoreNicknames[data.nick]);
+                var timeout = setTimeout(function() {
+                    delete ignoreNicknames[data.nick];
+                }, 4000);
+
+                ignoreNicknames[data.nick] = timeout;
                 console.log('skipping..');
             }
         }
