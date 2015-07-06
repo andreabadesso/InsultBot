@@ -59,7 +59,7 @@
 
             if (!ignoreNicknames.hasOwnProperty(data.nick)) {
                 if (data.nick !== botname && data.nick !== '*') {
-                    ws.send(JSON.stringify(['chat', '@' + data.nick + ': ' + insult + '']))
+                    ws.send(JSON.stringify(['chat', '$\\small\\red{\\text{@' + data.nick + ': ' + insult + '}}$']));
                 }
 
                 var timeout = setTimeout(function() {
