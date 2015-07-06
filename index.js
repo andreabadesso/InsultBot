@@ -40,28 +40,43 @@
         '*': ''
     };
 
-    var ws = new WebSocket('wss://hack.chat/chat-ws', null, { rejectUnauthorized: false });
+    var socketList = [];
 
-    ws.onopen = function() {
-        ws.send(JSON.stringify(['join', 'lobby', 'Mr. Walters']));
-    }
+    function setup(botname, room) {
+        var ws = new WebSocket('wss://hack.chat/chat-ws', null, {
+            rejectUnauthorized: false
+        });
 
-    ws.onmessage = function(message) {
-        console.log('Message... ');
-        var randomIndex = parseInt(Math.random(1, 10) * insults.length, 10);
-        var insult = insults[randomIndex];
-        var data = JSON.parse(message.data)
+        ws.onopen = function() {
+            ws.send(JSON.stringify(['join', room, botname]));
+        };
 
-        if (!ignoreNicknames.hasOwnProperty(data.nick)) {
-            ws.send(JSON.stringify(['chat', '@' + data.nick + ': ' + insult + '']))
-            ignoreNicknames[data.nick] = '';
-            setTimeout(function() {
-                delete ignoreNicknames[data.nick];
-            }, 4000);
-        } else {
-            console.log('skipping..');
+        ws.onmessage = function(message) {
+            console.log('Message... ');
+            var randomIndex = parseInt(Math.random(1, 10) * insults.length, 10);
+            var insult = insults[randomIndex];
+            var data = JSON.parse(message.data)
+
+            if (!ignoreNicknames.hasOwnProperty(data.nick)) {
+                ws.send(JSON.stringify(['chat', '@' + data.nick + ': ' + insult + '']))
+                ignoreNicknames[data.nick] = '';
+                setTimeout(function() {
+                    delete ignoreNicknames[data.nick];
+                }, 4000);
+            } else {
+                console.log('skipping..');
+            }
         }
+
+        ws.onclose = function() {
+            console.log('Socket closed..');
+        };
+
+        socketList.push(ws);
     }
 
-    ws.onclose = function() {}
+    channels.forEach(function(channel) {
+        setup('Mr. Walters', channel);
+    });
+
 }());
